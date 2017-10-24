@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
@@ -12,10 +13,11 @@ import theme from '../src/material_ui_raw_theme_file'
 
 class App extends Component {
   render() {
+    console.log(theme);
     const { todos, actions } = this.props;
     return (
       <div>
-        <MuiThemeProvider muiTheme={theme}>
+        <MuiThemeProvider theme={theme}>
           <div>
             <Header addTodo={actions.addTodo}/>
             <MainSection todos={todos} actions={actions}/>

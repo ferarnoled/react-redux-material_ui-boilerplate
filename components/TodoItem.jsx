@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import classnames from 'classnames';
 import TodoTextInput from './TodoTextInput';
-import { ListItem, IconButton, IconMenu, MenuItem } from 'material-ui';
-import { grey400 } from 'material-ui/styles/colors'
-
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import CheckBoxIcon from 'material-ui/svg-icons/toggle/check-box';
-import CheckBoxBlankIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank';
+import { ListItem, IconButton, MenuItem, ListItemText, ListItemSecondaryAction, Checkbox } from 'material-ui';
+import { Menu } from 'material-ui';
+import MoreVertIcon from 'material-ui/svg-icons/ArrowDropDown';
+import EditDeleteMenu from './EditDeleteMenu';
+import CheckBoxIcon from 'material-ui/svg-icons/CheckBox';
+import CheckBoxBlankIcon from 'material-ui/svg-icons/CheckBox';
 
 class TodoItem extends Component {
   constructor(props, context) {
@@ -16,11 +17,15 @@ class TodoItem extends Component {
     };
   }
 
-  handleEdit () {
+  handleEdit = () => {
     this.setState({ editing: true });
   }
 
-  handleSave(id, text) {
+  handleDelete = () => {
+    this.props.deleteTodo(this.props.todo.id);
+  }
+
+  handleSave = (id, text) => {
     if (text.length === 0) {
       this.props.deleteTodo(id);
     } else {
@@ -32,10 +37,11 @@ class TodoItem extends Component {
   render() {
     const { todo, completeTodo, deleteTodo } = this.props;
 
+    /*
     const rightIconMenu = (
       <IconMenu iconButtonElement={
           <IconButton>
-            <MoreVertIcon color={grey400} />
+            <MoreVertIcon color={'#EEEEEE'} />
           </IconButton>
         }
       >
@@ -43,7 +49,36 @@ class TodoItem extends Component {
         <MenuItem primaryText="Delete" onTouchTap={() => deleteTodo(todo.id)}/>
       </IconMenu>
     );
-
+*/
+    /*
+    const rightIconMenu = (
+        <div>
+          <IconButton
+              aria-label="More"
+              aria-owns={this.state.open ? 'long-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu>
+            id="long-menu"
+            anchorEl={this.state.anchorEl}
+            open={this.state.open}
+            onRequestClose={this.handleRequestClose}
+            PaperProps={{
+              style: {
+                maxHeight: 48 * 4.5,
+                    width: 200
+              }
+            }}
+          >
+            <MenuItem onClick={this.handleEdit.bind(this)}>Edit</MenuItem>
+            <MenuItem onClick={() => deleteTodo(todo.id)}>Delete</MenuItem>
+          </Menu>
+        </div>
+    );
+*/
     let element;
     if (this.state.editing) {
       element = (
@@ -53,11 +88,23 @@ class TodoItem extends Component {
       );
     } else {
       element = (
-        <ListItem primaryText={todo.text}
+        <ListItem key={todo.id}
                   onTouchTap={() => completeTodo(todo.id)}
-                  leftIcon={todo.completed ? <CheckBoxIcon /> : <CheckBoxBlankIcon />}
-                  rightIconButton={rightIconMenu}
-        />
+                  //leftIcon={todo.completed ? <CheckBoxIcon /> : <CheckBoxBlankIcon />}
+                  //rightIconButton={rightIconMenu}
+        >
+          <Checkbox
+              checked={todo.completed}
+              tabIndex={-1}
+              disableRipple
+          />
+          <ListItemText primary={todo.text} />
+          <ListItemSecondaryAction>
+            <EditDeleteMenu
+                onHandleEdit ={this.handleEdit}
+                onHandleDelete = {this.handleDelete}/>
+          </ListItemSecondaryAction>
+        </ListItem>
       );
     }
 

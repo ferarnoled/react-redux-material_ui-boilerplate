@@ -1,14 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import classnames from 'classnames';
 import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
-import { RaisedButton, List, ListItem, Divider } from 'material-ui';
+import { Button, List, ListItem, Divider, ListItemText, ListItemIcon } from 'material-ui';
 
-import InboxIcon from 'material-ui/svg-icons/content/inbox';
-import LoopIcon from 'material-ui/svg-icons/av/loop';
-import ArchiveIcon from 'material-ui/svg-icons/content/archive';
+import InboxIcon from 'material-ui-icons/Inbox';
+import LoopIcon from 'material-ui-icons/Loop';
+import ArchiveIcon from 'material-ui-icons/Archive';
 
 import palette from '../src/material_ui_raw_theme_file';
-
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',
@@ -37,10 +37,14 @@ class Footer extends Component {
     const count = this.getCountForFilter(filter);
     return (
       <ListItem key={filter} className={classnames({ selected: active })}
-                style={{color: active ? palette.primary1Color: palette.textColor}}
-                primaryText={title + (count > 0 ? ' (' +  count + ')' : '')}
-                leftIcon={FILTER_ICONS[filter]}
-                onTouchTap={() => onShow(filter)} />
+                style={{color: active ? palette.primaryColor : palette.textColor}}
+                onTouchTap={() => onShow(filter)}
+      >
+        <ListItemIcon>
+          {FILTER_ICONS[filter]}
+        </ListItemIcon>
+        <ListItemText primary={title + (count > 0 ? ' (' +  count + ')' : '')} />
+      </ListItem>
     );
   }
 
@@ -48,12 +52,14 @@ class Footer extends Component {
     const { completedCount, onClearCompleted } = this.props;
     if (completedCount > 0) {
       return (
-        <RaisedButton className="clear-completed"
-                      primary={true}
-                      label="Clear completed"
-                      onClick={onClearCompleted} />
+        <Button raised className="clear-completed"
+                      onClick={onClearCompleted}
+        >
+          Clear completed
+        </Button>
       );
     }
+    return null;
   }
 
   render() {
