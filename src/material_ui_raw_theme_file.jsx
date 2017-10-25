@@ -2,6 +2,59 @@ import { fade } from 'material-ui/styles/colorManipulator'
 import { spacing, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/createPalette';
 
+const grey = {
+  50: '#fdfdfd',
+  100: '#fafafa',
+  200: '#f7f7f7',
+  300: '#f3f3f3',
+  400: '#f1f1f1',
+  500: '#eeeeee',
+  600: '#ececec',
+  700: '#e9e9e9',
+  800: '#e7e7e7',
+  900: '#e2e2e2',
+  A100: '#ffffff',
+  A200: '#ffffff',
+  A400: '#ffffff',
+  A700: '#ffffff',
+  contrastDefaultColor: 'light'
+}
+const opOrange = {
+  50: '#ffecea',
+  100: '#fed0cb',
+  200: '#feb1a8',
+  300: '#fe9185',
+  400: '#fd7a6a',
+  500: '#fd6250',
+  600: '#fd5a49',
+  700: '#fc5040',
+  800: '#fc4637',
+  900: '#fc3427',
+  A100: '#ffffff',
+  A200: '#ffffff',
+  A400: '#ffd4d1',
+  A700: '#ffbbb8',
+  contrastDefaultColor: 'light'
+}
+
+const opGreen = {
+  50: '#e0f8f0',
+  100: '#b3eed9',
+  200: '#80e2c0',
+  300: '#4dd6a7',
+  400: '#26ce94',
+  500: '#00c581',
+  600: '#00bf79',
+  700: '#00b86e',
+  800: '#00b064',
+  900: '#00a351',
+  A100: '#ceffe3',
+  A200: '#9bffc6',
+  A400: '#68ffa8',
+  A700: '#4eff9a',
+  contrastDefaultColor: 'light'
+}
+
 const indigo = {
   50: '#e8eaf6',
   100: '#c5cae9',
@@ -40,9 +93,8 @@ const Idea42_Green = {
 
 const muiTheme = createMuiTheme({
   palette: createPalette({
-    primary: Idea42_Green,
-    accent: indigo,
-    error: Idea42_Green,
+    primary: opOrange,
+    secondary: opGreen,
     type: 'light'
   })
 });

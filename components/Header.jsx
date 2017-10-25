@@ -12,7 +12,9 @@ import MenuIcon from 'material-ui-icons/Menu';
 const defaultStyle = {
   marginLeft: 20
 };
+const appBarStyle = {
 
+}
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
@@ -24,6 +26,9 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  colorPrimary: {
+    color: '#FFFFFF'
   }
 });
 
@@ -39,7 +44,7 @@ class Header extends Component {
 
     return (
       <header className="header">
-        <AppBar position="static">
+        <AppBar position="static" className={classes.colorPrimary}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
               <MenuIcon />
